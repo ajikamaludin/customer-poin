@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     // Customer
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
     Route::post('/customers/import', [CustomerController::class, 'import'])->name('customer.import');
+    Route::get('/customers/event', [CustomerController::class, 'event'])->name('customer.event');
     Route::post('/customers', [CustomerController::class, 'store'])->name('customer.store');
     Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customer.destroy');

@@ -56,3 +56,10 @@ password : password
 ```bash
 npm run build
 ```
+
+```php
+$faker = Faker\Factory::create();
+foreach (range(0,1000) as $range) {
+    echo $faker->regexify('[A-Z]{5}[0-4]{3}').', '.$faker->name.','.$faker->randomNumber(3, false). "\n";
+}
+```

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
-            $table->string('code');
+            $table->string('code')->unique();
             $table->decimal('start_point', 20, 2);
             $table->decimal('last_point', 20, 2);
             $table->timestamps();

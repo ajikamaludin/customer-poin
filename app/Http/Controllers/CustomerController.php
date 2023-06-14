@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\CustomersImport;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -26,7 +28,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code' => 'required|string|max:255',
+            'code' => 'required|string|max:255|unique:customers,code',
             'name' => 'required|string|max:255',
             'point' => 'required|numeric',
         ]);
@@ -45,7 +47,7 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
-            'code' => 'required|string|max:255',
+            'code' => 'required|string|max:255|unique:customers,code',
             'name' => 'required|string|max:255',
             'point' => 'required|numeric',
         ]);
@@ -68,7 +70,15 @@ class CustomerController extends Controller
             ->with('message', ['type' => 'success', 'message' => 'Item has beed deleted']);
     }
 
-    public function import()
+    public function import(Request $request)
     {
+        $request->validate([
+            'file' => 'required|file'
+        ]);
+
+        Excel::import(new CustomersImport, $request->file('file'));
+
+        return redirect()->route('customer.index')
+            ->with('message', ['type' => 'success', 'message' => 'Import Success']);
     }
 }

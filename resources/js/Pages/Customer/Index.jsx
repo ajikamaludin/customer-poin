@@ -12,6 +12,7 @@ import ModalConfirm from '@/Components/ModalConfirm'
 import FormModal from './FormModal'
 import SearchInput from '@/Components/SearchInput'
 import { hasPermission } from '@/utils'
+import ImportModal from './ImportModal'
 
 export default function Customer(props) {
     const {
@@ -24,10 +25,15 @@ export default function Customer(props) {
 
     const confirmModal = useModalState()
     const formModal = useModalState()
+    const importModal = useModalState()
 
     const toggleFormModal = (customer = null) => {
         formModal.setData(customer)
         formModal.toggle()
+    }
+
+    const toggleImportModal = () => {
+        importModal.toggle()
     }
 
     const handleDeleteClick = (customer) => {
@@ -72,14 +78,23 @@ export default function Customer(props) {
             <div>
                 <div className="mx-auto sm:px-6 lg:px-8 ">
                     <div className="p-6 overflow-hidden shadow-sm sm:rounded-lg bg-gray-200 dark:bg-gray-800 space-y-4">
-                        <div className="flex justify-between">
+                        <div className="flex flex-col md:flex-row justify-between gap-2">
                             {canCreate && (
-                                <Button
-                                    size="sm"
-                                    onClick={() => toggleFormModal()}
-                                >
-                                    Create
-                                </Button>
+                                <div className="flex flex-row gap-2">
+                                    <Button
+                                        size="sm"
+                                        onClick={() => toggleFormModal()}
+                                    >
+                                        Create
+                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        outline
+                                        onClick={() => toggleImportModal()}
+                                    >
+                                        Import
+                                    </Button>
+                                </div>
                             )}
                             <div className="flex items-center">
                                 <SearchInput
@@ -191,6 +206,7 @@ export default function Customer(props) {
             </div>
             <ModalConfirm modalState={confirmModal} onConfirm={onDelete} />
             <FormModal modalState={formModal} />
+            <ImportModal modalState={importModal} />
         </AuthenticatedLayout>
     )
 }
