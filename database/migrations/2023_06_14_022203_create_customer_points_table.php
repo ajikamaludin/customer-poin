@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('customer_points', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+            $table->ulid('customer_id');
+            $table->string('description', 1000);
+            $table->decimal('point', 20, 2);
             $table->timestamps();
+            $table->softDeletes();
+            $table->ulid('created_by')->nullable();
+            $table->ulid('updated_by')->nullable();
+            $table->ulid('deleted_by')->nullable();
         });
     }
 

@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerPointController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/', [HomeController::class, 'check']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [GeneralController::class, 'index'])->name('dashboard');
@@ -33,6 +36,24 @@ Route::middleware(['auth'])->group(function () {
 
     // Role
     Route::resource('/roles', RoleController::class);
+
+    // Setting
+    Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+    Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
+
+    // Customer
+    Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
+    Route::post('/customers/import', [CustomerController::class, 'import'])->name('customer.import');
+    Route::post('/customers', [CustomerController::class, 'store'])->name('customer.store');
+    Route::put('/customers/{customer}', [CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+
+    // Customer Point
+    Route::get('/customers-points', [CustomerPointController::class, 'index'])->name('customer-point.index');
+    Route::post('/customers-points/import', [CustomerPointController::class, 'import'])->name('customer-point.import');
+    Route::post('/customers-points', [CustomerPointController::class, 'store'])->name('customer-point.store');
+    Route::put('/customers-points/{customer}', [CustomerPointController::class, 'update'])->name('customer-point.update');
+    Route::delete('/customers-points/{customer}', [CustomerPointController::class, 'destroy'])->name('customer-point.destroy');
 });
 
 Route::middleware('auth')->group(function () {
@@ -41,4 +62,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

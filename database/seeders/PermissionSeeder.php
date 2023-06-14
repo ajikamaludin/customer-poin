@@ -30,6 +30,18 @@ class PermissionSeeder extends Seeder
             ['id' => Str::ulid(), 'label' => 'Update Role', 'name' => 'update-role'],
             ['id' => Str::ulid(), 'label' => 'View Role', 'name' => 'view-role'],
             ['id' => Str::ulid(), 'label' => 'Delete Role', 'name' => 'delete-role'],
+
+            ['id' => Str::ulid(), 'label' => 'View Setting', 'name' => 'view-setting'],
+
+            ['id' => Str::ulid(), 'label' => 'Create Customer', 'name' => 'create-customer'],
+            ['id' => Str::ulid(), 'label' => 'Update Customer', 'name' => 'update-customer'],
+            ['id' => Str::ulid(), 'label' => 'View Customer', 'name' => 'view-customer'],
+            ['id' => Str::ulid(), 'label' => 'Delete Customer', 'name' => 'delete-customer'],
+
+            ['id' => Str::ulid(), 'label' => 'Create Customer Point', 'name' => 'create-customer-point'],
+            ['id' => Str::ulid(), 'label' => 'Update Customer Point', 'name' => 'update-customer-point'],
+            ['id' => Str::ulid(), 'label' => 'View Customer Point', 'name' => 'view-customer-point'],
+            ['id' => Str::ulid(), 'label' => 'Delete Customer Point', 'name' => 'delete-customer-point'],
         ];
 
         foreach ($permissions as $permission) {
