@@ -11,4 +11,9 @@ class Customer extends Model
         'start_point',
         'last_point',
     ];
+
+    public function points()
+    {
+        return $this->hasMany(CustomerPoint::class);
+    }
 }

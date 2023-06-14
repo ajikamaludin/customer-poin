@@ -52,9 +52,8 @@ Route::middleware(['auth'])->group(function () {
     // Customer Point
     Route::get('/customers-points', [CustomerPointController::class, 'index'])->name('customer-point.index');
     Route::post('/customers-points/import', [CustomerPointController::class, 'import'])->name('customer-point.import');
+    Route::get('/customers-points/create', [CustomerPointController::class, 'create'])->name('customer-point.create');
     Route::post('/customers-points', [CustomerPointController::class, 'store'])->name('customer-point.store');
-    Route::put('/customers-points/{customer}', [CustomerPointController::class, 'update'])->name('customer-point.update');
-    Route::delete('/customers-points/{customer}', [CustomerPointController::class, 'destroy'])->name('customer-point.destroy');
 });
 
 Route::middleware('auth')->group(function () {

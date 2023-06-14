@@ -9,4 +9,9 @@ class CustomerPoint extends Model
         'description',
         'point',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 }

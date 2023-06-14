@@ -30,7 +30,7 @@ export default [
         show: true,
         icon: HiTrophy,
         route: route('customer-point.index'),
-        active: 'customer-point.index',
+        active: 'customer-point.*',
         permission: 'view-customer-point',
     },
     {

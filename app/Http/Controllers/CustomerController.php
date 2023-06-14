@@ -18,7 +18,7 @@ class CustomerController extends Controller
                 ->orWhere('code', 'like', "%{$request->q}%");
         }
 
-        $query->orderBy('created_at', 'desc');
+        $query->orderBy('updated_at', 'desc');
 
         return inertia('Customer/Index', [
             'query' => $query->paginate(),
@@ -47,7 +47,7 @@ class CustomerController extends Controller
     public function update(Request $request, Customer $customer)
     {
         $request->validate([
-            'code' => 'required|string|max:255|unique:customers,code',
+            'code' => 'required|string|max:255|unique:customers,code,' . $customer->id,
             'name' => 'required|string|max:255',
             'point' => 'required|numeric',
         ]);

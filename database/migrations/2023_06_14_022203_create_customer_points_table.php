@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('customer_points', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->ulid('customer_id');
-            $table->string('description', 1000);
-            $table->decimal('point', 20, 2);
+            $table->string('description', 1000)->nullable();
+            $table->decimal('point', 20, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->ulid('created_by')->nullable();

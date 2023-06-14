@@ -15,8 +15,8 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('name');
             $table->string('code')->unique();
-            $table->decimal('start_point', 20, 2);
-            $table->decimal('last_point', 20, 2);
+            $table->decimal('start_point', 20, 2)->default(0);
+            $table->decimal('last_point', 20, 2)->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->ulid('created_by')->nullable();
