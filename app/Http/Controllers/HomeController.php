@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -11,6 +13,8 @@ class HomeController extends Controller
     {
         return inertia('Home', [
             'app_name' => Setting::where('key', 'app_name')->value('value'),
+            'customer' => null,
+            'point' => 0,
         ]);
     }
 
@@ -18,6 +22,19 @@ class HomeController extends Controller
     {
         $request->validate([
             'customer_code' => 'required|string|exists:customers,code'
+        ]);
+
+        $name = "";
+        $customer = Customer::where('code', $request->customer_code)->first();
+        $names = explode(' ', $customer->name);
+        foreach ($names as $n) {
+            $name .= Str::mask($n, '*', 3) . ' ';
+        }
+        return inertia('Home', [
+            'app_name' => Setting::where('key', 'app_name')->value('value'),
+            'customer' => $name,
+            'point' => $customer->last_point,
+            'names' => $names
         ]);
     }
 }

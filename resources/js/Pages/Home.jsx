@@ -4,7 +4,7 @@ import InputError from '@/Components/Defaults/InputError'
 import { Head, Link, useForm } from '@inertiajs/react'
 import { Button, TextInput, Label, Checkbox, Spinner } from 'flowbite-react'
 
-export default function Login({ app_name }) {
+export default function Login({ app_name, customer, point }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         customer_code: '',
     })
@@ -44,7 +44,6 @@ export default function Login({ app_name }) {
                             type="text"
                             name="customer_code"
                             value={data.customer_code}
-                            className="mt-1 block w-full"
                             autoFocus={true}
                             onChange={onHandleChange}
                             placeholder="Customer Code"
@@ -53,9 +52,24 @@ export default function Login({ app_name }) {
 
                         <InputError
                             message={errors.customer_code}
-                            className="mt-2"
+                            className="mt-5"
                         />
                     </div>
+                    {customer !== null && (
+                        <div
+                            className="p-4 my-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                            role="alert"
+                        >
+                            <div className="text-lg">
+                                Customer:{' '}
+                                <span className="font-bold">{customer}</span>
+                            </div>
+                            <div className="text-lg">
+                                Point:{' '}
+                                <span className="font-bold">{point}</span>
+                            </div>
+                        </div>
+                    )}
 
                     <div className="flex items-center justify-end mt-4">
                         <Button onClick={submit} disabled={processing}>

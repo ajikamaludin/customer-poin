@@ -84,6 +84,7 @@ export default function Customer(props) {
                                         onItemSelected={(id) =>
                                             setCustomerId(id)
                                         }
+                                        placeholder="filter customer"
                                     />
                                 </div>
                                 <div className="w-full">
