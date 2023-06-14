@@ -57,9 +57,17 @@ password : password
 npm run build
 ```
 
+## Other
+
 ```php
 $faker = Faker\Factory::create();
 foreach (range(0,1000) as $range) {
     echo $faker->regexify('[A-Z]{5}[0-4]{3}').', '.$faker->name.','.$faker->randomNumber(3, false). "\n";
 }
+```
+
+```bash
+rsync -arP -e 'ssh -p 224' --exclude=node_modules --exclude=.git --exclude=.env --exclude=storage --exclude=public/hot . arm@ajikamaludin.id:/home/arm/projects/point
+
+rsync -arP -e 'ssh -p 224' --exclude=node_modules --exclude=database/database.sqlite --exclude=.git --exclude=.env --exclude=storage --exclude=public/hot . arm@ajikamaludin.id:/home/arm/projects/point
 ```
