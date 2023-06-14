@@ -37,8 +37,10 @@ npm run dev # compiling asset for development # keep run for dev
 ```
 
 <hr/>
+
 easy way
-```bash 
+
+```bash
 docker compose up -d
 ```
 
