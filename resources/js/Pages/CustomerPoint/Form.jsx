@@ -77,7 +77,7 @@ export default function Setting(props) {
                                             Customer
                                         </th>
                                         <th scope="col" className="py-3 px-6">
-                                            Point
+                                            Point (- / +)
                                         </th>
                                         <th scope="col" className="py-3 px-6">
                                             Description
