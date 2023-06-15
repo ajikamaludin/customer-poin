@@ -1,10 +1,12 @@
 import React from 'react'
+import { Head, useForm, router } from '@inertiajs/react'
+import { isEmpty } from 'lodash'
+
+import { useModalState } from '@/hooks'
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import FormInput from '@/Components/FormInput'
 import Button from '@/Components/Button'
-import { Head, useForm } from '@inertiajs/react'
-import TextArea from '@/Components/TextArea'
-import { isEmpty } from 'lodash'
+import ModalConfirm from '@/Components/ModalConfirm'
 
 const extractValue = (set, key) => {
     const find = set.find((s) => s.key === key)
@@ -39,6 +41,12 @@ export default function Setting(props) {
         post(route('setting.update'))
     }
 
+    const confirmModal = useModalState()
+
+    const onReset = () => {
+        router.post(route('setting.reset'))
+    }
+
     return (
         <AuthenticatedLayout
             auth={props.auth}
@@ -67,6 +75,23 @@ export default function Setting(props) {
                             >
                                 Simpan
                             </Button>
+                        </div>
+                        <div className="mt-5 border rounded-md p-4 flex flex-col">
+                            <label className="font-bold mb-2">
+                                Reset All Data
+                            </label>
+                            <div>
+                                <Button
+                                    type="danger"
+                                    onClick={confirmModal.toggle}
+                                >
+                                    Reset
+                                </Button>
+                            </div>
+                            <ModalConfirm
+                                modalState={confirmModal}
+                                onConfirm={onReset}
+                            />
                         </div>
                     </div>
                 </div>

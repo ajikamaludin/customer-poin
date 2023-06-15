@@ -40,6 +40,7 @@ Route::middleware(['auth'])->group(function () {
     // Setting
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::post('/setting', [SettingController::class, 'update'])->name('setting.update');
+    Route::post('/setting/reset', [GeneralController::class, 'reset'])->name('setting.reset');
 
     // Customer
     Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');
